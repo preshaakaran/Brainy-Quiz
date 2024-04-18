@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+        }
+        
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        #submit-button {
+            display: block;
+            margin: 0 auto;
+            background-color: #0074D9;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #submit-button:hover {
+            background-color: #0056b3;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Science Quiz</h1>
+        <div id="quiz">
+        <div class="question" data-correct-answer="b">
+            <p>What is the chemical symbol for water?</p>
+            <input type="radio" name="s1" value="a"> A) H2O2<br>
+            <input type="radio" name="s1" value="b"> B) H2O<br>
+            <input type="radio" name="s1" value="c"> C) O2<br>
+        </div>
+        
+        <div class="question" data-correct-answer="a">
+            <p>Which of the following is a noble gas?</p>
+            <input type="radio" name="s2" value="a"> A) Helium (He)<br>
+            <input type="radio" name="s2" value="b"> B) Oxygen (O)<br>
+            <input type="radio" name="s2" value="c"> C) Nitrogen (N)<br>
+        </div>
+        
+        <div class="question" data-correct-answer="a">
+            <p>What is the chemical formula for glucose?</p>
+            <input type="radio" name="s3" value="a"> A) C6H12O6<br>
+            <input type="radio" name="s3" value="b"> B) CO2<br>
+            <input type="radio" name="s3" value="c"> C) H2SO4<br>
+        </div>
+        
+        <div class="question" data-correct-answer="c">
+            <p>Which subatomic particle has a negative charge?</p>
+            <input type="radio" name="s4" value="a"> A) Proton<br>
+            <input type="radio" name="s4" value="b"> B) Neutron<br>
+            <input type="radio" name="s4" value="c"> C) Electron<br>
+        </div>
+        
+        <div class="question" data-correct-answer="b">
+            <p>What is the chemical formula for sulfuric acid?</p>
+            <input type="radio" name="s5" value="a"> A) HCl<br>
+            <input type="radio" name="s5" value="b"> B) H2SO4<br>
+            <input type="radio" name="s5" value="c"> C) NaOH<br>
+        </div>
+        
+        <div class="question" data-correct-answer="b">
+            <p>Which planet is known as the "Red Planet"?</p>
+            <input type="radio" name="s6" value="a"> A) Venus<br>
+            <input type="radio" name="s6" value="b"> B) Mars<br>
+            <input type="radio" name="s6" value="c"> C) Jupiter<br>
+        </div>
+        
+        <div class="question" data-correct-answer="b">
+            <p>What is the SI unit of electric current?</p>
+            <input type="radio" name="s7" value="a"> A) Volt<br>
+            <input type="radio" name="s7" value="b"> B) Ampere<br>
+            <input type="radio" name="s7" value="c"> C) Ohm<br>
+        </div>
+        
+        <div class="question" data-correct-answer="b">
+            <p>Which gas makes up the majority of Earth's atmosphere?</p>
+            <input type="radio" name="s8" value="a"> A) Oxygen<br>
+            <input type="radio" name="s8" value="b"> B) Nitrogen<br>
+            <input type="radio" name="s8" value="c"> C) Carbon dioxide<br>
+        </div>
+        
+        <div class="question" data-correct-answer="b">
+            <p>What is the process by which plants make their own food called?</p>
+            <input type="radio" name="s9" value="a"> A) Respiration<br>
+            <input type="radio" name="s9" value="b"> B) Photosynthesis<br>
+            <input type="radio" name="s9" value="c"> C) Digestion<br>
+        </div>
+        
+        <div class="question" data-correct-answer="a">
+            <p>What is the chemical formula for sodium chloride?</p>
+            <input type="radio" name="s10" value="a"> A) NaCl<br>
+            <input type="radio" name="s10" value="b"> B) H2O<br>
+            <input type="radio" name="s10" value="c"> C) CO2<br>
+        </div>
+        
+            
+        </div>
+        <!-- Add more questions here -->
+        {% comment %} <a id="submit-button" href="/result"  > {% endcomment %}
+            <button id="submit-button" onclick="checkAnswers()">Submit</button>
+        {% comment %} </a> {% endcomment %}
+        
+    </div>
+    <script>
+        function checkAnswers() {
+            var questions = document.querySelectorAll('.question');
+            var correctCount = 0;
+            console.log(questions.length);
+            questions.forEach(function(question) {
+                var selectedAnswer = question.querySelector('input[type="radio"]:checked');
+                if (selectedAnswer) {
+                    var correctAnswer = question.getAttribute('data-correct-answer');
+                    if (selectedAnswer.value === correctAnswer) {
+                        correctCount++;
+                    }
+                }
+            });
+            
+           
+            let count=correctCount;
+            {% comment %} alert("You got " + correctCount + " out of " + questions.length + " correct."); {% endcomment %}
+            send(count);
+        }
+        function send(count) {
+            console.log(count);
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/result/?count=" + count, true); // URL of your Django view
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Redirect to result page with count as a URL parameter
+                    window.location.href = "/result/?count=" + count;
+                }
+            };
+            xhr.send(); 
+        }
+            
+            
+        
+        
+    </script>
+</body>
+</html>
+

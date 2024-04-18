@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+        }
+        
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        #submit-button {
+            display: block;
+            margin: 0 auto;
+            background-color: #0074D9;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #submit-button:hover {
+            background-color: #0056b3;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Maths Quiz</h1>
+        <div id="quiz">
+            <div class="question" data-correct-answer="b">
+                <p>What is the value of π (pi) correct to two decimal places?</p>
+                <input type="radio" name="m1" value="a"> A) 3.14<br>
+                <input type="radio" name="m1" value="b"> B) 3.14<br>
+                <input type="radio" name="m1" value="c"> C) 3.15<br>
+            </div>
+            
+            <div class="question" data-correct-answer="c">
+                <p>What is the square root of 144?</p>
+                <input type="radio" name="m2" value="a"> A) 10<br>
+                <input type="radio" name="m2" value="b"> B) 12<br>
+                <input type="radio" name="m2" value="c"> C) 12<br>
+            </div>
+            
+            <div class="question" data-correct-answer="a">
+                <p>What is the result of 5 + 7 * 2?</p>
+                <input type="radio" name="m3" value="a"> A) 19<br>
+                <input type="radio" name="m3" value="b"> B) 24<br>
+                <input type="radio" name="m3" value="c"> C) 26<br>
+            </div>
+            
+            <div class="question" data-correct-answer="c">
+                <p>What is the area of a rectangle with length 6 cm and width 4 cm?</p>
+                <input type="radio" name="m4" value="a"> A) 20 cm²<br>
+                <input type="radio" name="m4" value="b"> B) 24 cm²<br>
+                <input type="radio" name="m4" value="c"> C) 24 cm²<br>
+            </div>
+            
+            <div class="question" data-correct-answer="b">
+                <p>What is the value of 2 to the power of 3?</p>
+                <input type="radio" name="m5" value="a"> A) 6<br>
+                <input type="radio" name="m5" value="b"> B) 8<br>
+                <input type="radio" name="m5" value="c"> C) 9<br>
+            </div>
+            
+            <div class="question" data-correct-answer="a">
+                <p>What is the result of 15 divided by 3?</p>
+                <input type="radio" name="m6" value="a"> A) 5<br>
+                <input type="radio" name="m6" value="b"> B) 4<br>
+                <input type="radio" name="m6" value="c"> C) 6<br>
+            </div>
+            
+            <div class="question" data-correct-answer="c">
+                <p>What is the circumference of a circle with radius 5 cm (use π = 3.14)?</p>
+                <input type="radio" name="m7" value="a"> A) 10.14 cm<br>
+                <input type="radio" name="m7" value="b"> B) 15.7 cm<br>
+                <input type="radio" name="m7" value="c"> C) 31.4 cm<br>
+            </div>
+            
+            <div class="question" data-correct-answer="a">
+                <p>What is the result of 3 squared?</p>
+                <input type="radio" name="m8" value="a"> A) 9<br>
+                <input type="radio" name="m8" value="b"> B) 6<br>
+                <input type="radio" name="m8" value="c"> C) 12<br>
+            </div>
+            
+            <div class="question" data-correct-answer="b">
+                <p>What is the value of 4 times 7?</p>
+                <input type="radio" name="m9" value="a"> A) 24<br>
+                <input type="radio" name="m9" value="b"> B) 28<br>
+                <input type="radio" name="m9" value="c"> C) 32<br>
+            </div>
+            
+            <div class="question" data-correct-answer="c">
+                <p>What is the result of 10 minus 4?</p>
+                <input type="radio" name="m10" value="a"> A) 4<br>
+                <input type="radio" name="m10" value="b"> B) 6<br>
+                <input type="radio" name="m10" value="c"> C) 6<br>
+            </div>
+            
+            
+        </div>
+        <!-- Add more questions here -->
+        {% comment %} <a id="submit-button" href="/result"  > {% endcomment %}
+            <button id="submit-button" onclick="checkAnswers()">Submit</button>
+        {% comment %} </a> {% endcomment %}
+        
+    </div>
+    <script>
+        function checkAnswers() {
+            var questions = document.querySelectorAll('.question');
+            var correctCount = 0;
+            console.log(questions.length);
+            questions.forEach(function(question) {
+                var selectedAnswer = question.querySelector('input[type="radio"]:checked');
+                if (selectedAnswer) {
+                    var correctAnswer = question.getAttribute('data-correct-answer');
+                    if (selectedAnswer.value === correctAnswer) {
+                        correctCount++;
+                    }
+                }
+            });
+            
+           
+            let count=correctCount;
+            {% comment %} alert("You got " + correctCount + " out of " + questions.length + " correct."); {% endcomment %}
+            send(count);
+        }
+        function send(count) {
+            console.log(count);
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/result/?count=" + count, true); // URL of your Django view
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Redirect to result page with count as a URL parameter
+                    window.location.href = "/result/?count=" + count;
+                }
+            };
+            xhr.send(); 
+        }
+            
+            
+        
+        
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GK Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+        }
+        
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        #submit-button {
+            display: block;
+            margin: 0 auto;
+            background-color: #0074D9;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #submit-button:hover {
+            background-color: #0056b3;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Gk Quiz</h1>
+        <div id="quiz">
+            <div class="question" data-correct-answer="c"> <!-- Add data-correct-answer attribute with the correct answer -->
+                <p>What is the capital of France?</p>
+                <input type="radio" name="q1" value="a"> A) London<br>
+                <input type="radio" name="q1" value="b"> B) Rome<br>
+                <input type="radio" name="q1" value="c"> C) Paris<br>
+            </div>
+            <div class="question" data-correct-answer="a">
+                <p>Who painted the Mona Lisa?</p>
+                <input type="radio" name="q2" value="a"> A) Leonardo da Vinci<br>
+                <input type="radio" name="q2" value="b"> B) Vincent van Gogh<br>
+                <input type="radio" name="q2" value="c"> C) Pablo Picasso<br>
+            </div>
+            
+            <div class="question" data-correct-answer="b">
+                <p>What is the currency of the United Kingdom?</p>
+                <input type="radio" name="q3" value="a"> A) Euro<br>
+                <input type="radio" name="q3" value="b"> B) Pound Sterling<br>
+                <input type="radio" name="q3" value="c"> C) Dollar<br>
+            </div>
+            
+            <div class="question" data-correct-answer="c">
+                <p>Which planet is known as the "Red Planet"?</p>
+                <input type="radio" name="q4" value="a"> A) Venus<br>
+                <input type="radio" name="q4" value="b"> B) Mercury<br>
+                <input type="radio" name="q4" value="c"> C) Mars<br>
+            </div>
+            
+            <div class="question" data-correct-answer="b">
+                <p>Who wrote "Harry Potter and the Philosopher's Stone"?</p>
+                <input type="radio" name="q5" value="a"> A) J.R.R. Tolkien<br>
+                <input type="radio" name="q5" value="b"> B) J.K. Rowling<br>
+                <input type="radio" name="q5" value="c"> C) C.S. Lewis<br>
+            </div>
+            
+            <div class="question" data-correct-answer="a">
+                <p>Which country is known as the "Land of the Rising Sun"?</p>
+                <input type="radio" name="q6" value="a"> A) Japan<br>
+                <input type="radio" name="q6" value="b"> B) China<br>
+                <input type="radio" name="q6" value="c"> C) South Korea<br>
+            </div>
+            
+            <div class="question" data-correct-answer="c">
+                <p>What is the chemical symbol for gold?</p>
+                <input type="radio" name="q7" value="a"> A) Ag<br>
+                <input type="radio" name="q7" value="b"> B) Au<br>
+                <input type="radio" name="q7" value="c"> C) Au<br>
+            </div>
+            
+            <div class="question" data-correct-answer="b">
+                <p>Who was the first man to walk on the moon?</p>
+                <input type="radio" name="q8" value="a"> A) Buzz Aldrin<br>
+                <input type="radio" name="q8" value="b"> B) Neil Armstrong<br>
+                <input type="radio" name="q8" value="c"> C) Yuri Gagarin<br>
+            </div>
+            
+            <div class="question" data-correct-answer="a">
+                <p>What is the largest ocean on Earth?</p>
+                <input type="radio" name="q9" value="a"> A) Pacific Ocean<br>
+                <input type="radio" name="q9" value="b"> B) Atlantic Ocean<br>
+                <input type="radio" name="q9" value="c"> C) Indian Ocean<br>
+            </div>
+            
+            <div class="question" data-correct-answer="c">
+                <p>Which is the tallest mountain in the world?</p>
+                <input type="radio" name="q10" value="a"> A) Mount Kilimanjaro<br>
+                <input type="radio" name="q10" value="b"> B) Mount Everest<br>
+                <input type="radio" name="q10" value="c"> C) Mount Everest<br>
+            </div>
+            
+        </div>
+        <!-- Add more questions here -->
+        {% comment %} <a id="submit-button" href="/result"  > {% endcomment %}
+            <button id="submit-button" onclick="checkAnswers()">Submit</button>
+        {% comment %} </a> {% endcomment %}
+        
+    </div>
+    <script>
+        function checkAnswers() {
+            var questions = document.querySelectorAll('.question');
+            var correctCount = 0;
+            console.log(questions.length);
+            questions.forEach(function(question) {
+                var selectedAnswer = question.querySelector('input[type="radio"]:checked');
+                if (selectedAnswer) {
+                    var correctAnswer = question.getAttribute('data-correct-answer');
+                    if (selectedAnswer.value === correctAnswer) {
+                        correctCount++;
+                    }
+                }
+            });
+            
+           
+            let count=correctCount;
+            {% comment %} alert("You got " + correctCount + " out of " + questions.length + " correct."); {% endcomment %}
+            send(count);
+        }
+        function send(count) {
+            console.log(count);
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/result/?count=" + count, true); // URL of your Django view
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Redirect to result page with count as a URL parameter
+                    window.location.href = "/result/?count=" + count;
+                }
+            };
+            xhr.send(); 
+        }
+            
+            
+        
+        
+    </script>
+</body>
+</html>
+
